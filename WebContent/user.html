@@ -1,0 +1,36 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<form name="userForm">
+				<center>
+					<h3>Registro de Usuario</h3>
+				</center>
+				<br />
+				<div class="col-md-2">
+					<h4>Nome:</h4>
+				</div>
+				<div class="col-md-8">
+					<input type="text" name="userName" id="userName" class="form-control" placeholder="Marcel Fonseca" ng-model="user.name" ng-required="true">
+				</div>
+				<button class="btn btn-success" id="userInsert" name="userInsert" ng-click="userInsert(user)" ng-hide="userForm.$invalid">ADICIONAR</button>
+		</form>
+		</div>
+		<div class="col-md-6">
+			<center><h3>Lista de Usuarios</h3></center><br />
+			<form name="searchForm">
+				<input type="text" name="userSearch" id="userSearch" class="form-control" placeholder="Procure aqui o nome do usuario!" ng-model="search" ng-required="true" ng-if="users" ng-keyup="userSearch(user)">
+			</form>
+			<table class="table" ng-if="users" ng-init="userList()">
+				<tr>
+					<td>NOME</td>
+				</tr>
+				<tr ng-repeat="user in users | filter : search | orderBy : 'name'">
+					<td ng-bind="user.name"></td>
+				</tr>
+			</table> 
+			<h5 ng-if="!users">0 usuarios cadastrados!</h5>
+			<h5 ng-if="users.length == 0">Nenhum resultado encontrado!</h5>
+		</div>
+	</div>
+</div>
+
