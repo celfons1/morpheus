@@ -4,7 +4,7 @@ angular.module("morpheus").service('userService', function($http) {
 		$http.get("http://localhost:8080/morpheus/users/get").success(function(data){
 			return data;
 		}).error(function(){
-			return alert("Erro na conexão, tente novamente!");	
+			return alert("Erro na conexão, tente novamente!");
 		});
 	};
 
