@@ -1,19 +1,19 @@
 angular.module("morpheus").service('userService', function($http) {
 
-	this.userList = function(){
-		return  $http({
-			 	method: 'GET',
-	            url: 'http://localhost:8080/morpheus/rest/get', 
-	            headers: {'Access-Control-Allow-Origin': '*'}
-		});
-	};
-
-	this.userInsert = function(user){
-		$http.post("http://localhost:8080/morpheus/rest/post",user).success(function(){
-			return true;
-		}).error(function(){
-			return false;	
-		});
-	};
+	this.uploadFile = function(file){
+		var fd = new FormData();
+		fd.append('data', angular.toJson(file));
+		console.log(file);/*
+        $http({
+        	method: 'POST',
+            url: 'http://localhost:8080/morpheus/rest/post', 
+            data: fd,
+            headers: {'Access-Control-Allow-Origin': '*'}
+        }).success(function(data){
+        	console.log("ok");
+        }).error(function(){
+        	console.log("fail");
+        });*/
+     }
 
 });		

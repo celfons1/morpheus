@@ -1,1 +1,1 @@
-angular.module("morpheus",["ngStorage","ngRoute","ngMaterial"]);
+angular.module("morpheus",["ngRoute","ngMaterial","ngFileUpload"]);

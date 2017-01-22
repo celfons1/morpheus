@@ -1,33 +1,34 @@
 package rest;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 @Path("/")
 public class userApi {	
-	
-	@GET
-	@Path("/get")
-	@Produces(MediaType.APPLICATION_JSON)
-	public User userList() {
-
-		User u = new User("Marcel");
-		
-		return u;
-	}
-
 	@POST
 	@Path("/post")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void userInsert(String s) {
-		
-		new User(s);
-
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response userFile(@FormParam("data") FileUploadForm data) {
+		/*try {
+		      FileReader arq = new FileReader(file);
+		      BufferedReader lerArq = new BufferedReader(arq);
+		 
+		      String linha = lerArq.readLine();
+		      while (linha != null) {
+		        System.out.printf("%s\n", linha);
+		        linha = lerArq.readLine();
+		      }
+		 
+		      arq.close();
+		    } catch (IOException e) {
+		        System.err.printf("Erro na abertura do arquivo: %s.\n",
+		          e.getMessage());
+		    }*/
+		return Response.ok("{\"name\": \"Marcel\"}", MediaType.APPLICATION_JSON).build();
 	}
-	
 }
