@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+
 @Path("/")
 public class userApi {
 	
@@ -15,17 +16,18 @@ public class userApi {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User userList() {
 
-		User u = new User();
-		u.setName("Marcel");
+		User u = new User("Marcel");
+		
 		return u;
-
 	}
 
 	@POST
 	@Path("/post")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Boolean userInsert(User u) {
-		return true;
+	public void userInsert(String s) {
+		
+		new User(s);
+
 	}
 	
 }
