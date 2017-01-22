@@ -1,4 +1,4 @@
-package com.morpheus;
+package rest;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 
 @Path("/")
-public class userApi {
+public class userApi {	
 	
 	@GET
 	@Path("/get")

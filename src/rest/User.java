@@ -1,4 +1,4 @@
-package com.morpheus;
+package rest;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
