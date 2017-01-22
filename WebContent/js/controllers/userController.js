@@ -1,17 +1,17 @@
 angular.module("morpheus").controller("userController",function($scope,userService){
 
-	$scope.users = [{
-		name:null
-	}];
+	$scope.users = [];
 
 	$scope.userList = function(){
-		//$scope.users = userService.userList();
+		userService.userList().then(function(response) {
+			console.log(response.data.name);
+			$scope.users.push({name: response.data.name});
+		});
 	};
 
 	$scope.userInsert = function(user){
 		userService.userInsert(user);
 		$scope.users.push({name: user.name});
-		console.log(user);
 	};
 	
 });	
