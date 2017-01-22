@@ -12,7 +12,7 @@ angular.module("morpheus").controller("userController",function($scope, Upload){
            Upload.upload({
         	   method: 'POST',
                url: 'http://localhost:8080/morpheus/rest/post', 
-               data:  file,
+               file:  file,
                headers: {'Access-Control-Allow-Origin': '*'}
            }).then(function (resp) {
           	 $scope.users.push({name:resp.data.name});
