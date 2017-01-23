@@ -14,11 +14,7 @@ angular.module("morpheus").controller("userController",function($scope,$http, Up
 	}
 	
 	$scope.userList = function(user){
-		$http({
-     	   method: 'GET',
-            url: 'http://localhost:8080/morpheus/rest/download', 
-            headers: {'Access-Control-Allow-Origin': '*'}
-        });
+		window.location.href = "http://localhost:8080/morpheus/rest/download" ;
 	}
      
      $scope.submit = function(file) {
