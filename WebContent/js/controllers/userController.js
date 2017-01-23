@@ -18,8 +18,6 @@ angular.module("morpheus").controller("userController",function($scope,$http, Up
      	   method: 'GET',
             url: 'http://localhost:8080/morpheus/rest/download', 
             headers: {'Access-Control-Allow-Origin': '*'}
-        }).success(function (data) {
-        	return data;
         });
 	}
      

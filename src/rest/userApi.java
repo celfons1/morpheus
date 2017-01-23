@@ -33,7 +33,7 @@ public class UserApi {
 	@POST
 	@Path("/attachment")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	@Produces({MediaType.APPLICATION_JSON})
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response attachment(File file) throws IOException {	
 				
 		FileInputStream receive = new FileInputStream(file);
@@ -69,30 +69,14 @@ public class UserApi {
 	
 	@GET
 	@Path("/download")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN })
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response list() throws IOException{
 		
-		 StreamingOutput fileStream =  new StreamingOutput() 
-	        {
-	            @Override
-	            public void write(java.io.OutputStream output) throws IOException, WebApplicationException 
-	            {
-	                try
-	                {
-	                	File temp = File.createTempFile("nomes", ".txt");
-	                    java.nio.file.Path path = Paths.get(Paths.get(temp.getAbsolutePath()).getParent()+"\\nomes.txt");
-	                    byte[] data = Files.readAllBytes(path);
-	                    output.write(data);
-	                    output.flush();
-	                } 
-	                catch (Exception e) 
-	                {
-	                    throw new WebApplicationException();
-	                }
-	            }
-	        };
+		 File temp = File.createTempFile("nomes", ".txt");
+		 File file = new File(Paths.get(temp.getAbsolutePath()).getParent()+"\\nomes.txt");
+
 	        return Response
-	                .ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
+	                .ok(file, MediaType.APPLICATION_OCTET_STREAM)
 	                .header("content-disposition","attachment; filename = nomes.txt")
 	                .build();
 	    }
