@@ -4,11 +4,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +32,7 @@ public class UserApi {
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces({MediaType.APPLICATION_JSON})
 	public Response attachment(File file) throws IOException {	
-		
+				
 		FileInputStream receive = new FileInputStream(file);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(receive));
 		
@@ -57,14 +55,16 @@ public class UserApi {
 	
 	@GET
 	@Path("/download")
-	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	@Produces("text/plain")
 	public Response list() throws IOException{
 		
 		String json = new Gson().toJson(list);
-		Writer file = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("nomes.txt"), "utf-8"));
-		file.write(json);
-		ResponseBuilder response = Response.ok((Object) file);
-		response.header("Content-Disposition", "attachment; filename=nome.txt");
+		File file =  File.createTempFile("nomes", ".txt"); 
+		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        writer.write(json);
+        writer.close();
+		ResponseBuilder response = Response.ok(file);
+		response.type("text/plain");
 		return response.build();
 				
 	}
