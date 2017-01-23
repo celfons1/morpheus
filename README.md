@@ -9,7 +9,7 @@ Angular JS
 
 DEPLOY
 
-import morpheus.war file or copy morpheus.war for webapp tomcat folder
+import morpheus.war file or mvn clean install and copy morpheus.war for webapp tomcat folder
 
 run server
 
