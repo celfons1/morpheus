@@ -1,6 +1,10 @@
 package rest;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -16,7 +20,16 @@ public class UserApi {
 	@Path("/post")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces({MediaType.APPLICATION_JSON})
-	public Response userFile(File file) {	
+	public Response userFile(File file) throws IOException {	
+		
+		FileInputStream receive = new FileInputStream(file);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(receive));
+		
+		String line = reader.readLine();
+        while(line != null){
+            line = reader.readLine();
+            System.out.println("{\"name\":"+line+"}");
+        }        
         return Response.ok("{\"name\": \"Marcel\"}",MediaType.APPLICATION_JSON).build();
 	}
 }
