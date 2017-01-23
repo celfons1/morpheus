@@ -1,9 +1,26 @@
-angular.module("morpheus").controller("userController",function($scope, Upload){
+angular.module("morpheus").controller("userController",function($scope,$http, Upload){
 
 	$scope.users = [];
 	
 	$scope.userInsert = function(user){
-		$scope.users.push({name : user.name});
+		$http({
+     	   method: 'POST',
+            url: 'http://localhost:8080/morpheus/rest/insert', 
+            data:  user.name,
+            headers: {'Access-Control-Allow-Origin': '*'}
+        }).then(function (response) {
+        	$scope.users.push({name : user.name});
+        });
+	}
+	
+	$scope.userList = function(user){
+		$http({
+     	   method: 'GET',
+            url: 'http://localhost:8080/morpheus/rest/download', 
+            headers: {'Access-Control-Allow-Origin': '*'}
+        }).success(function (data) {
+        	return data;
+        });
 	}
      
      $scope.submit = function(file) {
@@ -15,12 +32,11 @@ angular.module("morpheus").controller("userController",function($scope, Upload){
        $scope.uploadFile = function (file) {
            Upload.upload({
         	   method: 'POST',
-               url: 'http://localhost:8080/morpheus/rest/post', 
+               url: 'http://localhost:8080/morpheus/rest/attachment', 
                file:  file,
                headers: {'Access-Control-Allow-Origin': '*'}
            }).then(function (resp) {
         	   for(var i=0; i<resp.data.length; i++) {
-            	   console.log(resp.data[i].name);
         		    $scope.users.push({
         		        name: resp.data[i].name
         		    });
